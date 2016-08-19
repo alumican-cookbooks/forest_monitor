@@ -1,0 +1,2 @@
+0 6-18 * * * ubuntu bash /home/ubuntu/scripts/s3_upload.sh
+10 * * * * root rm -f /tmp/motion/*

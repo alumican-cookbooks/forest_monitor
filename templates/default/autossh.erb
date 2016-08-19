@@ -1,0 +1,30 @@
+N INIT INFO
+# Provides:             autossh
+# Required-Start:       $local_fs
+# Required-Stop:        $local_fs
+# Default-Start:        2 3 4 5
+# Default-Stop:         0 1 6
+# Short-Description:    autossh tunnel
+### END INIT INFO
+TARGET=<%= node['forest_monitor']['graph_server'] %>
+TARGET_PORT=<%= node['forest_monitor']['target_port'] %>
+
+start(){
+        echo -n "starting autossh...\n"
+        su -s /bin/sh autossh -c "autossh -M 0 -q -f -N -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 100\" -R $TARGET_PORT:127.0.0.1:22 $TARGET"
+        return 0
+}
+
+stop(){
+        echo -n "stopping autossh...\n"
+        killall autossh
+        return 0
+}
+case $1 in
+        start)
+                start
+                        ;;
+        stop)
+                stop
+                        ;;
+esac

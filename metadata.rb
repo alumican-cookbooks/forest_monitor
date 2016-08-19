@@ -5,3 +5,5 @@ license 'all_rights'
 description 'Installs/Configures forest_monitor'
 long_description 'Installs/Configures forest_monitor'
 version '0.1.0'
+
+depends "apt"
